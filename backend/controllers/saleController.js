@@ -1,8 +1,7 @@
-import * as saleService from '../services/saleService.js';
-
 export const createSale = async (req, res, next) => {
     try {
-        const saleId = await saleService.processSale(req.body);
+        // تمرير الـ userId هنا
+        const saleId = await saleService.processSale(req.body, req.userId);
         res.status(201).json({ 
             success: true, 
             message: "تمت عملية البيع بنجاح", 

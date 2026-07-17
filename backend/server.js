@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
-import { errorHandler } from './middlewares/errorHandler.js';
+import { errorHandler } from './middleware/errorHandler.js';
 import productRoutes from './routes/productRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import customerRoutes from './routes/customerRoutes.js';
@@ -13,6 +13,7 @@ import purchaseRoutes from './routes/purchaseRoutes.js';
 import expenseRoutes from './routes/expenseRoutes.js';
 import reportRoutes from './routes/reportRoutes.js';
 import returnRoutes from './routes/returnRoutes.js';
+import authRoutes from './routes/authRoutes.js'
 
 
 dotenv.config();
@@ -45,6 +46,7 @@ app.use('/purchases', purchaseRoutes);
 app.use('/expenses', expenseRoutes);
 app.use('/dashboard', reportRoutes);
 app.use('/returns', returnRoutes);
+app.use('/auth', authRoutes);
 
 
 
