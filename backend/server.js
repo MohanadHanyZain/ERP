@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { errorHandler } from './middlewares/errorHandler.js';
 import productRoutes from './routes/productRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ app.use('/products', productRoutes);
 
 // Error Handler
 app.use(errorHandler);
+
+app.use('/categories', categoryRoutes);
 
 
 
