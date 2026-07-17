@@ -25,6 +25,6 @@ export const login = async (req, res) => {
         return res.status(401).json({ success: false, message: "البريد أو كلمة السر خطأ" });
     }
 
-    const token = jwt.sign({ id: users[0].id }, SECRET_KEY, { expiresIn: '24h' });
+    const token = jwt.sign({ id: users[0].id, role: users[0].role }, SECRET_KEY, { expiresIn: '24h' });
     res.status(200).json({ success: true, token });
 };
