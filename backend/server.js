@@ -6,6 +6,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import productRoutes from './routes/productRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import customerRoutes from './routes/customerRoutes.js';
+import supplierRoutes from './routes/supplierRoutes.js';
 
 dotenv.config();
 
@@ -30,6 +31,8 @@ app.use(errorHandler);
 app.use('/products', productRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/customers', customerRoutes);
+app.use('/suppliers', supplierRoutes);
+
 
 
 
