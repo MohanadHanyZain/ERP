@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import { errorHandler } from './middlewares/errorHandler.js';
+import productRoutes from './routes/productRoutes.js';
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ app.use(morgan('dev'));
 app.get('/health', (req, res) => {
     res.status(200).json({ success: true, message: "System is healthy!" });
 });
+
+app.use('/products', productRoutes);
 
 
 // Error Handler
