@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import { errorHandler } from './middlewares/errorHandler.js';
 import productRoutes from './routes/productRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
+import customerRoutes from './routes/customerRoutes.js';
 
 dotenv.config();
 
@@ -21,13 +22,14 @@ app.get('/health', (req, res) => {
     res.status(200).json({ success: true, message: "System is healthy!" });
 });
 
-app.use('/products', productRoutes);
 
 
 // Error Handler
 app.use(errorHandler);
 
+app.use('/products', productRoutes);
 app.use('/categories', categoryRoutes);
+app.use('/customers', customerRoutes);
 
 
 
