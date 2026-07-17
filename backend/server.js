@@ -21,20 +21,20 @@ dotenv.config();
 const app = express();
 
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ success: true, message: "System is healthy!" });
+});
+
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
 
-app.get('/health', (req, res) => {
-    res.status(200).json({ success: true, message: "System is healthy!" });
-});
 
 
 
-// Error Handler
-app.use(errorHandler);
 
 app.use('/products', productRoutes);
 app.use('/categories', categoryRoutes);
@@ -50,6 +50,8 @@ app.use('/auth', authRoutes);
 
 
 
+// Error Handler
+app.use(errorHandler);
 
 
 const PORT = process.env.PORT || 3000;
