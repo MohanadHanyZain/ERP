@@ -10,6 +10,9 @@ import supplierRoutes from './routes/supplierRoutes.js';
 import transactionRoutes from './routes/transactionRoutes.js';
 import saleRoutes from './routes/saleRoutes.js';
 import purchaseRoutes from './routes/purchaseRoutes.js';
+import expenseRoutes from './routes/expenseRoutes.js';
+import reportRoutes from './routes/reportRoutes.js';
+import returnRoutes from './routes/returnRoutes.js';
 
 
 dotenv.config();
@@ -39,6 +42,9 @@ app.use('/suppliers', supplierRoutes);
 app.use('/transactions', transactionRoutes);
 app.use('/sales', saleRoutes);
 app.use('/purchases', purchaseRoutes);
+app.use('/expenses', expenseRoutes);
+app.use('/dashboard', reportRoutes);
+app.use('/returns', returnRoutes);
 
 
 
