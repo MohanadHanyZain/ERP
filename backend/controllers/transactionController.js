@@ -1,15 +1,13 @@
 import * as transactionService from '../services/transactionService.js';
+import { sendSuccess } from '../utils/responseHelper.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
-export const addTransaction = async (req, res, next) => {
-    try {
-        const transaction = await transactionService.createTransaction(req.body, req.userId);
-        res.status(201).json({ success: true, data: transaction });
-    } catch (error) { next(error); }
-};
+export const addTransaction = asyncHandler(async (req, res) => {
+    const transaction = await transactionService.createTransaction(req.body, req.user.id);
+    return sendSuccess(res, transaction, 'تم إضافة المعاملة بنجاح', 201);
+});
 
-export const getTransactions = async (req, res, next) => {
-    try {
-        const transactions = await transactionService.getTransactions(req.userId);
-        res.status(200).json({ success: true, data: transactions });
-    } catch (error) { next(error); }
-};
+export const getTransactions = asyncHandler(async (req, res) => {
+    const transactions = await transactionService.getTransactions(req.user.id);
+    return sendSuccess(res, transactions, 'تم جلب قائمة المعاملات بنجاح');
+});

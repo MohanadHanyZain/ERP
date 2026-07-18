@@ -11,7 +11,7 @@ export const verifyToken = (req, res, next) => {
     jwt.verify(token, SECRET_KEY, (err, decoded) => {
         if (err) return res.status(401).json({ success: false, message: "توكن غير صالح" });
         
-        // هنا نقوم بتخزين الـ payload كاملة (بما فيها id و role)
+        
         req.user = decoded; 
         next();
     });

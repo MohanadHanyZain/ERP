@@ -1,12 +1,13 @@
 import * as reportService from '../services/reportService.js';
+import { sendSuccess } from '../utils/responseHelper.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
-export const getStats = async (req, res, next) => {
-    try {
-        // نستقبل التواريخ من الرابط مثل: /dashboard?startDate=2026-07-01&endDate=2026-07-31
-        const { startDate, endDate } = req.query;
-        const stats = await reportService.getDashboardStats(startDate, endDate);
-        res.status(200).json({ success: true, data: stats });
-    } catch (error) {
-        next(error);
-    }
-};
+export const getStats = asyncHandler(async (req, res) => {
+    // نستقبل التواريخ من الرابط
+    const { startDate, endDate } = req.query;
+    
+    // جلب الإحصائيات
+    const stats = await reportService.getDashboardStats(startDate, endDate, req.user.id);
+    
+    return sendSuccess(res, stats, 'تم جلب الإحصائيات بنجاح');
+});

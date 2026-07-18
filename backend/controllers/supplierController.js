@@ -1,15 +1,13 @@
 import * as supplierService from '../services/supplierService.js';
+import { sendSuccess } from '../utils/responseHelper.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
-export const getSuppliers = async (req, res, next) => {
-    try {
-        const suppliers = await supplierService.getAllSuppliers(req.userId);
-        res.status(200).json({ success: true, data: suppliers });
-    } catch (error) { next(error); }
-};
+export const getSuppliers = asyncHandler(async (req, res) => {
+    const suppliers = await supplierService.getAllSuppliers(req.user.id);
+    return sendSuccess(res, suppliers, 'تم جلب قائمة الموردين بنجاح');
+});
 
-export const addSupplier = async (req, res, next) => {
-    try {
-        const newSupplier = await supplierService.createSupplier(req.body, req.userId);
-        res.status(201).json({ success: true, data: newSupplier });
-    } catch (error) { next(error); }
-};
+export const addSupplier = asyncHandler(async (req, res) => {
+    const newSupplier = await supplierService.createSupplier(req.body, req.user.id);
+    return sendSuccess(res, newSupplier, 'تم إضافة المورد بنجاح', 201);
+});

@@ -38,22 +38,6 @@ app.use(morgan('dev'));
 
 
 app.use('/products', productRoutes);
-// --- 1. مسار جلب منتج واحد (لعملية التعديل) ---
-app.get('/products/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        // قم بتعديل هذا السطر ليتناسب مع مكتبة قواعد البيانات التي تستخدمها (Sequelize أو غيرها)
-        const product = await Product.findByPk(id); 
-        if (product) {
-            res.json({ success: true, data: product });
-        } else {
-            res.status(404).json({ success: false, message: 'المنتج غير موجود' });
-        }
-    } catch (error) {
-        res.status(500).json({ success: false, message: 'خطأ في السيرفر' });
-    }
-});
-
 app.use('/categories', categoryRoutes);
 app.use('/customers', customerRoutes);
 app.use('/suppliers', supplierRoutes);

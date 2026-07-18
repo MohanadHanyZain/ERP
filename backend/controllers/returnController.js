@@ -1,8 +1,8 @@
 import * as returnService from '../services/returnService.js';
+import { sendSuccess } from '../utils/responseHelper.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
-export const handleCustomerReturn = async (req, res, next) => {
-    try {
-        const result = await returnService.processCustomerReturn(req.body, req.userId);
-        res.status(201).json({ success: true, message: "تم تسجيل المرتجع بنجاح", data: result });
-    } catch (error) { next(error); }
-};
+export const handleCustomerReturn = asyncHandler(async (req, res) => {
+    const result = await returnService.processCustomerReturn(req.body, req.user.id);
+    return sendSuccess(res, result, "تم تسجيل المرتجع بنجاح", 201);
+});

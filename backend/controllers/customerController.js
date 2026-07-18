@@ -1,15 +1,13 @@
 import * as customerService from '../services/customerService.js';
+import { sendSuccess } from '../utils/responseHelper.js';
+import asyncHandler from '../utils/asyncHandler.js';
 
-export const getCustomers = async (req, res, next) => {
-    try {
-        const customers = await customerService.getAllCustomers(req.userId);
-        res.status(200).json({ success: true, data: customers });
-    } catch (error) { next(error); }
-};
+export const getCustomers = asyncHandler(async (req, res) => {
+    const customers = await customerService.getAllCustomers(req.user.id);
+    return sendSuccess(res, customers, 'تم جلب قائمة العملاء بنجاح');
+});
 
-export const addCustomer = async (req, res, next) => {
-    try {
-        const newCustomer = await customerService.createCustomer(req.body, req.userId);
-        res.status(201).json({ success: true, data: newCustomer });
-    } catch (error) { next(error); }
-};
+export const addCustomer = asyncHandler(async (req, res) => {
+    const newCustomer = await customerService.createCustomer(req.body, req.user.id);
+    return sendSuccess(res, newCustomer, 'تم إضافة العميل بنجاح', 201);
+});
