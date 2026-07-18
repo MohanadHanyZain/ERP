@@ -2,7 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
-import { errorHandler } from './middleware/errorHandler.js';
 import productRoutes from './routes/productRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import customerRoutes from './routes/customerRoutes.js';
@@ -14,6 +13,8 @@ import expenseRoutes from './routes/expenseRoutes.js';
 import reportRoutes from './routes/reportRoutes.js';
 import returnRoutes from './routes/returnRoutes.js';
 import authRoutes from './routes/authRoutes.js'
+import { errorHandler } from './middleware/errorHandler.js';
+
 
 
 dotenv.config();

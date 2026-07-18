@@ -16,3 +16,29 @@ export const validate = (schema) => {
         next();
     };
 };
+
+export const categorySchema = Joi.object({
+    name: Joi.string().min(2).required(),
+    description: Joi.string().optional()
+});
+
+export const customerSchema = Joi.object({
+    name: Joi.string().min(3).required(),
+    phone: Joi.string().optional()
+});
+
+export const expenseSchema = Joi.object({
+    amount: Joi.number().positive().required(),
+    description: Joi.string().required()
+});
+
+export const saleSchema = Joi.object({
+    product_id: Joi.string().uuid().required(),
+    quantity: Joi.number().integer().positive().required()
+});
+
+export const purchaseSchema = Joi.object({
+    product_id: Joi.string().uuid().required(),
+    quantity: Joi.number().integer().positive().required(),
+    cost_price: Joi.number().positive().required()
+});
