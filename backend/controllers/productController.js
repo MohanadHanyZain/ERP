@@ -39,3 +39,9 @@ export const updateProduct = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getProductById = async (req, res) => {
+    const product = await productService.getProductById(req.params.id);
+    if (product) res.json({ success: true, data: product });
+    else res.status(404).json({ success: false, message: 'غير موجود' });
+};

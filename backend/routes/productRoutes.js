@@ -9,6 +9,7 @@ const router = Router();
 
 // الترتيب الصحيح: (1) تحقق من التوكن -> (2) تحقق من الدور -> (3) تنفيذ المنطق
 router.get('/', verifyToken, checkRole([ROLES.ADMIN, ROLES.MANAGER, ROLES.CASHIER]), getProducts);
+router.get('/:id', productController.getProductById, checkRole([ROLES.ADMIN, ROLES.MANAGER, ROLES.CASHIER]));
 router.post('/', verifyToken, checkRole([ROLES.ADMIN]), validate(productSchema), addProduct); 
 router.delete('/:id', verifyToken, checkRole([ROLES.ADMIN]), deleteProduct);
 router.put('/:id', verifyToken, checkRole([ROLES.ADMIN]), validate(productSchema), updateProduct);
